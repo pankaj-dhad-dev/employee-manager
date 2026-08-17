@@ -2,34 +2,63 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
 
     <meta
       name="description"
       content="A responsive employee management dashboard built with HTML, CSS, and vanilla JavaScript."
     />
 
-    <title>Employee Management Dashboard - Vanilla JavaScript CRUD Application</title>
+    <title>
+      Employee Management Dashboard - Vanilla JavaScript CRUD Application
+    </title>
 
     <link rel="stylesheet" href="main.css" />
   </head>
 
   <body>
-    <!-- Header -->
+    <!-- =========================
+         Header
+    ========================== -->
     <header class="topbar">
       <a
         class="brand"
         href="#dashboard"
         aria-label="Employee Manager dashboard"
       >
-        <span class="brand-mark" aria-hidden="true">E</span>
-        <span class="brand-name">Employee Manager</span>
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          E
+        </span>
+
+        <span class="brand-name">
+          Employee Manager
+        </span>
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
-        <a class="active" href="#dashboard">Dashboard</a>
-        <a href="#employees">Employees</a>
-        <a href="#about">About</a>
+      <nav
+        class="nav-links"
+        aria-label="Main navigation"
+      >
+        <a
+          class="active"
+          href="#dashboard"
+        >
+          Dashboard
+        </a>
+
+        <a href="#employees">
+          Employees
+        </a>
+
+        <a href="#about">
+          About
+        </a>
       </nav>
 
       <div class="header-actions">
@@ -42,34 +71,41 @@
         >
           ☾
         </button>
-
-        <button
-          id="openEmployeeModal"
-          class="primary"
-          type="button"
-        >
-          + Add Employee
-        </button>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main id="dashboard" class="container">
-
+    <!-- =========================
+         Main Content
+    ========================== -->
+    <main
+      id="dashboard"
+      class="container"
+    >
       <!-- Hero -->
-      <section class="hero" aria-labelledby="pageTitle">
+      <section
+        class="hero"
+        aria-labelledby="pageTitle"
+      >
         <div>
-          <p class="eyebrow">HUMAN RESOURCES</p>
+          <p class="eyebrow">
+            HUMAN RESOURCES
+          </p>
 
           <h1 id="pageTitle">
-            Manage your team <span>with clarity.</span>
+            Manage your team
+            <span>with clarity.</span>
           </h1>
 
-          <p id="todayText" class="muted"></p>
+          <p
+            id="todayText"
+            class="muted"
+          ></p>
         </div>
       </section>
 
-      <!-- Statistics -->
+      <!-- =========================
+           Statistics
+      ========================== -->
       <section
         class="stats"
         aria-label="Employee summary"
@@ -131,30 +167,49 @@
         </article>
       </section>
 
-      <!-- Employees -->
+      <!-- =========================
+           Employees
+      ========================== -->
       <section
         id="employees"
         aria-labelledby="employeeHeading"
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">TEAM DIRECTORY</p>
-            <h2 id="employeeHeading">Employees</h2>
+            <p class="eyebrow">
+              TEAM DIRECTORY
+            </p>
+
+            <h2 id="employeeHeading">
+              Employees
+            </h2>
           </div>
 
-          <button
-            id="clearFilters"
-            class="text-button"
-            type="button"
-          >
-            Clear filters
-          </button>
+          <div class="section-actions">
+            <button
+              id="openEmployeeModal"
+              class="primary"
+              type="button"
+            >
+              + Add Employee
+            </button>
+
+            <button
+              id="clearFilters"
+              class="text-button"
+              type="button"
+            >
+              Clear filters
+            </button>
+          </div>
         </div>
 
         <!-- Filters -->
         <div class="toolbar">
           <label class="search">
-            <span aria-hidden="true">⌕</span>
+            <span aria-hidden="true">
+              ⌕
+            </span>
 
             <input
               id="searchInput"
@@ -171,7 +226,9 @@
               id="departmentFilter"
               aria-label="Filter employees by department"
             >
-              <option value="all">All departments</option>
+              <option value="all">
+                All departments
+              </option>
             </select>
           </label>
 
@@ -182,10 +239,21 @@
               id="statusFilter"
               aria-label="Filter employees by status"
             >
-              <option value="all">All statuses</option>
-              <option value="Active">Active</option>
-              <option value="On Leave">On Leave</option>
-              <option value="Inactive">Inactive</option>
+              <option value="all">
+                All statuses
+              </option>
+
+              <option value="Active">
+                Active
+              </option>
+
+              <option value="On Leave">
+                On Leave
+              </option>
+
+              <option value="Inactive">
+                Inactive
+              </option>
             </select>
           </label>
         </div>
@@ -195,10 +263,22 @@
           <table>
             <thead>
               <tr>
-                <th scope="col">Employee</th>
-                <th scope="col">Role &amp; Department</th>
-                <th scope="col">Joined</th>
-                <th scope="col">Status</th>
+                <th scope="col">
+                  Employee
+                </th>
+
+                <th scope="col">
+                  Role &amp; Department
+                </th>
+
+                <th scope="col">
+                  Joined
+                </th>
+
+                <th scope="col">
+                  Status
+                </th>
+
                 <th scope="col">
                   <span class="visually-hidden">
                     Actions
@@ -218,7 +298,9 @@
           hidden
           aria-labelledby="emptyTitle"
         >
-          <span aria-hidden="true">✦</span>
+          <span aria-hidden="true">
+            ✦
+          </span>
 
           <h3 id="emptyTitle">
             No employees found
@@ -238,30 +320,37 @@
         </section>
       </section>
 
-      <!-- About -->
+      <!-- =========================
+           About
+      ========================== -->
       <section
         id="about"
         class="about"
         aria-labelledby="aboutHeading"
       >
-        <span aria-hidden="true">✦</span>
+        <span aria-hidden="true">
+          ✦
+        </span>
 
         <div>
           <h2 id="aboutHeading">
             A simple way to keep your team organized.
           </h2>
 
-         <p>
-  Employee Manager is a responsive employee management
-  dashboard built with HTML, CSS, and vanilla JavaScript.
-  Employee records are stored locally in the browser using
-  localStorage.
-</p>
+          <p>
+            Employee Manager is a responsive employee
+            management dashboard built with HTML, CSS,
+            and vanilla JavaScript. Employee records are
+            stored locally in the browser using
+            localStorage.
+          </p>
         </div>
       </section>
     </main>
 
-    <!-- Employee Modal -->
+    <!-- =========================
+         Employee Modal
+    ========================== -->
     <div
       id="employeeModal"
       class="overlay"
@@ -368,9 +457,17 @@
                 id="employeeStatus"
                 name="employeeStatus"
               >
-                <option value="Active">Active</option>
-                <option value="On Leave">On Leave</option>
-                <option value="Inactive">Inactive</option>
+                <option value="Active">
+                  Active
+                </option>
+
+                <option value="On Leave">
+                  On Leave
+                </option>
+
+                <option value="Inactive">
+                  Inactive
+                </option>
               </select>
             </label>
 
@@ -407,9 +504,12 @@
       </section>
     </div>
 
-    <!-- Footer -->
+    <!-- =========================
+         Footer
+    ========================== -->
     <footer>
-      Employee Manager · Built with HTML, CSS &amp; JavaScript ·
+      Employee Manager · Built with HTML,
+      CSS &amp; JavaScript ·
       <span id="year"></span>
     </footer>
 

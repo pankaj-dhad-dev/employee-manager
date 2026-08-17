@@ -15,12 +15,13 @@ const defaultEmployees = [
   {
     id: 1,
     name: "Sofia Williams",
-    email: "Sofia.Williams@employee_management.com",
+    email: "sofia.williams@employee_management.com",
     role: "Product Designer",
     department: "Design",
     status: "Active",
     joinDate: "2026-03-12",
   },
+
   {
     id: 2,
     name: "Amelia Clarke",
@@ -30,15 +31,17 @@ const defaultEmployees = [
     status: "Active",
     joinDate: "2026-05-18",
   },
+
   {
     id: 3,
     name: "Lucas Bennett",
-    email: "lucas_bennet@employee_management.com",
+    email: "lucas.bennett@employee_management.com",
     role: "Marketing Specialist",
     department: "Marketing",
     status: "On Leave",
     joinDate: "2025-11-04",
   },
+
   {
     id: 4,
     name: "Daniel Wilson",
@@ -56,13 +59,15 @@ const defaultEmployees = [
 
 function getEmployees() {
   try {
-    const savedEmployees = localStorage.getItem(STORAGE_KEY);
+    const savedEmployees =
+      localStorage.getItem(STORAGE_KEY);
 
     if (!savedEmployees) {
       return [...defaultEmployees];
     }
 
-    const parsedEmployees = JSON.parse(savedEmployees);
+    const parsedEmployees =
+      JSON.parse(savedEmployees);
 
     return Array.isArray(parsedEmployees)
       ? parsedEmployees
@@ -74,9 +79,14 @@ function getEmployees() {
 
 function saveEmployees() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(employees));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(employees),
+    );
   } catch {
-    console.warn("Employee data could not be saved to localStorage.");
+    console.warn(
+      "Employee data could not be saved to localStorage.",
+    );
   }
 }
 
@@ -87,36 +97,92 @@ let employees = getEmployees();
 ================================ */
 
 const elements = {
-  employeeList: document.querySelector("#employeeList"),
-  emptyState: document.querySelector("#emptyState"),
+  employeeList:
+    document.querySelector("#employeeList"),
 
-  searchInput: document.querySelector("#searchInput"),
-  departmentFilter: document.querySelector("#departmentFilter"),
-  statusFilter: document.querySelector("#statusFilter"),
+  emptyState:
+    document.querySelector("#emptyState"),
 
-  employeeModal: document.querySelector("#employeeModal"),
-  employeeForm: document.querySelector("#employeeForm"),
+  searchInput:
+    document.querySelector("#searchInput"),
 
-  employeeId: document.querySelector("#employeeId"),
-  employeeName: document.querySelector("#employeeName"),
-  employeeEmail: document.querySelector("#employeeEmail"),
-  employeeRole: document.querySelector("#employeeRole"),
-  employeeDepartment: document.querySelector("#employeeDepartment"),
-  employeeStatus: document.querySelector("#employeeStatus"),
-  employeeJoinDate: document.querySelector("#employeeJoinDate"),
+  departmentFilter:
+    document.querySelector("#departmentFilter"),
 
-  modalTitle: document.querySelector("#modalTitle"),
-  modalEyebrow: document.querySelector("#modalEyebrow"),
-  saveEmployee: document.querySelector("#saveEmployee"),
+  statusFilter:
+    document.querySelector("#statusFilter"),
 
-  totalCount: document.querySelector("#totalCount"),
-  activeCount: document.querySelector("#activeCount"),
-  departmentCount: document.querySelector("#departmentCount"),
-  newCount: document.querySelector("#newCount"),
+  employeeModal:
+    document.querySelector("#employeeModal"),
 
-  themeToggle: document.querySelector("#themeToggle"),
-  todayText: document.querySelector("#todayText"),
-  year: document.querySelector("#year"),
+  employeeForm:
+    document.querySelector("#employeeForm"),
+
+  employeeId:
+    document.querySelector("#employeeId"),
+
+  employeeName:
+    document.querySelector("#employeeName"),
+
+  employeeEmail:
+    document.querySelector("#employeeEmail"),
+
+  employeeRole:
+    document.querySelector("#employeeRole"),
+
+  employeeDepartment:
+    document.querySelector("#employeeDepartment"),
+
+  employeeStatus:
+    document.querySelector("#employeeStatus"),
+
+  employeeJoinDate:
+    document.querySelector("#employeeJoinDate"),
+
+  modalTitle:
+    document.querySelector("#modalTitle"),
+
+  modalEyebrow:
+    document.querySelector("#modalEyebrow"),
+
+  saveEmployee:
+    document.querySelector("#saveEmployee"),
+
+  totalCount:
+    document.querySelector("#totalCount"),
+
+  activeCount:
+    document.querySelector("#activeCount"),
+
+  departmentCount:
+    document.querySelector("#departmentCount"),
+
+  newCount:
+    document.querySelector("#newCount"),
+
+  themeToggle:
+    document.querySelector("#themeToggle"),
+
+  todayText:
+    document.querySelector("#todayText"),
+
+  year:
+    document.querySelector("#year"),
+
+  openEmployeeModal:
+    document.querySelector("#openEmployeeModal"),
+
+  openEmployeeEmpty:
+    document.querySelector("#openEmployeeEmpty"),
+
+  closeModal:
+    document.querySelector("#closeModal"),
+
+  cancelEmployee:
+    document.querySelector("#cancelEmployee"),
+
+  clearFilters:
+    document.querySelector("#clearFilters"),
 };
 
 /* ================================
@@ -124,7 +190,8 @@ const elements = {
 ================================ */
 
 function escapeHtml(text) {
-  const element = document.createElement("div");
+  const element =
+    document.createElement("div");
 
   element.textContent = text;
 
@@ -135,7 +202,9 @@ function getInitials(name) {
   return name
     .trim()
     .split(/\s+/)
-    .map((word) => word.charAt(0))
+    .map((word) =>
+      word.charAt(0),
+    )
     .slice(0, 2)
     .join("")
     .toUpperCase();
@@ -146,11 +215,16 @@ function formatDate(date) {
     return "";
   }
 
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date(`${date}T00:00:00`));
+  return new Intl.DateTimeFormat(
+    "en",
+    {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    },
+  ).format(
+    new Date(`${date}T00:00:00`),
+  );
 }
 
 function isNewThisMonth(employee) {
@@ -159,11 +233,17 @@ function isNewThisMonth(employee) {
   }
 
   const today = new Date();
-  const joiningDate = new Date(`${employee.joinDate}T00:00:00`);
+
+  const joiningDate =
+    new Date(
+      `${employee.joinDate}T00:00:00`,
+    );
 
   return (
-    joiningDate.getMonth() === today.getMonth() &&
-    joiningDate.getFullYear() === today.getFullYear()
+    joiningDate.getMonth() ===
+      today.getMonth() &&
+    joiningDate.getFullYear() ===
+      today.getFullYear()
   );
 }
 
@@ -172,12 +252,16 @@ function isNewThisMonth(employee) {
 ================================ */
 
 function updateDepartmentFilter() {
-  const selectedDepartment = elements.departmentFilter.value;
+  const selectedDepartment =
+    elements.departmentFilter.value;
 
   const departments = [
     ...new Set(
       employees
-        .map((employee) => employee.department)
+        .map(
+          (employee) =>
+            employee.department,
+        )
         .filter(Boolean),
     ),
   ].sort();
@@ -187,16 +271,24 @@ function updateDepartmentFilter() {
     departments
       .map(
         (department) =>
-          `<option value="${escapeHtml(department)}">${escapeHtml(
+          `<option value="${escapeHtml(
             department,
-          )}</option>`,
+          )}">
+            ${escapeHtml(department)}
+          </option>`,
       )
       .join("");
 
-  if (departments.includes(selectedDepartment)) {
-    elements.departmentFilter.value = selectedDepartment;
+  if (
+    departments.includes(
+      selectedDepartment,
+    )
+  ) {
+    elements.departmentFilter.value =
+      selectedDepartment;
   } else {
-    elements.departmentFilter.value = "all";
+    elements.departmentFilter.value =
+      "all";
   }
 }
 
@@ -205,21 +297,29 @@ function updateDepartmentFilter() {
 ================================ */
 
 function updateStatistics() {
-  elements.totalCount.textContent = employees.length;
+  elements.totalCount.textContent =
+    employees.length;
 
-  elements.activeCount.textContent = employees.filter(
-    (employee) => employee.status === "Active",
-  ).length;
+  elements.activeCount.textContent =
+    employees.filter(
+      (employee) =>
+        employee.status === "Active",
+    ).length;
 
-  elements.departmentCount.textContent = new Set(
-    employees
-      .map((employee) => employee.department)
-      .filter(Boolean),
-  ).size;
+  elements.departmentCount.textContent =
+    new Set(
+      employees
+        .map(
+          (employee) =>
+            employee.department,
+        )
+        .filter(Boolean),
+    ).size;
 
-  elements.newCount.textContent = employees.filter(
-    isNewThisMonth,
-  ).length;
+  elements.newCount.textContent =
+    employees.filter(
+      isNewThisMonth,
+    ).length;
 }
 
 /* ================================
@@ -229,112 +329,142 @@ function updateStatistics() {
 function renderEmployees() {
   updateDepartmentFilter();
 
-  const searchTerm = elements.searchInput.value
-    .trim()
-    .toLowerCase();
+  const searchTerm =
+    elements.searchInput.value
+      .trim()
+      .toLowerCase();
 
-  const selectedDepartment = elements.departmentFilter.value;
-  const selectedStatus = elements.statusFilter.value;
+  const selectedDepartment =
+    elements.departmentFilter.value;
 
-  const filteredEmployees = employees.filter((employee) => {
-    const searchableText = `
-      ${employee.name}
-      ${employee.email}
-      ${employee.role}
-      ${employee.department}
-    `.toLowerCase();
+  const selectedStatus =
+    elements.statusFilter.value;
 
-    const matchesSearch =
-      searchableText.includes(searchTerm);
+  const filteredEmployees =
+    employees.filter(
+      (employee) => {
+        const searchableText = `
+          ${employee.name}
+          ${employee.email}
+          ${employee.role}
+          ${employee.department}
+        `.toLowerCase();
 
-    const matchesDepartment =
-      selectedDepartment === "all" ||
-      employee.department === selectedDepartment;
+        const matchesSearch =
+          searchableText.includes(
+            searchTerm,
+          );
 
-    const matchesStatus =
-      selectedStatus === "all" ||
-      employee.status === selectedStatus;
+        const matchesDepartment =
+          selectedDepartment === "all" ||
+          employee.department ===
+            selectedDepartment;
 
-    return (
-      matchesSearch &&
-      matchesDepartment &&
-      matchesStatus
+        const matchesStatus =
+          selectedStatus === "all" ||
+          employee.status ===
+            selectedStatus;
+
+        return (
+          matchesSearch &&
+          matchesDepartment &&
+          matchesStatus
+        );
+      },
     );
-  });
 
-  elements.employeeList.innerHTML = filteredEmployees
-    .map((employee) => {
-      const statusClass = employee.status
-        .toLowerCase()
-        .replace(/\s+/g, "-");
+  elements.employeeList.innerHTML =
+    filteredEmployees
+      .map((employee) => {
+        const statusClass =
+          employee.status
+            .toLowerCase()
+            .replace(/\s+/g, "-");
 
-      return `
-        <tr>
-          <td>
-            <div class="person">
-              <span class="avatar">
-                ${getInitials(employee.name)}
-              </span>
+        return `
+          <tr>
+            <td>
+              <div class="person">
+                <span
+                  class="avatar"
+                  aria-hidden="true"
+                >
+                  ${getInitials(
+                    employee.name,
+                  )}
+                </span>
 
-              <div>
-                <strong>
-                  ${escapeHtml(employee.name)}
-                </strong>
+                <div>
+                  <strong>
+                    ${escapeHtml(
+                      employee.name,
+                    )}
+                  </strong>
 
-                <small>
-                  ${escapeHtml(employee.email)}
-                </small>
+                  <small>
+                    ${escapeHtml(
+                      employee.email,
+                    )}
+                  </small>
+                </div>
               </div>
-            </div>
-          </td>
+            </td>
 
-          <td>
-            <strong>
-              ${escapeHtml(employee.role)}
-            </strong>
+            <td>
+              <strong>
+                ${escapeHtml(
+                  employee.role,
+                )}
+              </strong>
 
-            <span class="department-name">
-              ${escapeHtml(employee.department)}
-            </span>
-          </td>
+              <span class="department-name">
+                ${escapeHtml(
+                  employee.department,
+                )}
+              </span>
+            </td>
 
-          <td>
-            ${formatDate(employee.joinDate)}
-          </td>
+            <td>
+              ${formatDate(
+                employee.joinDate,
+              )}
+            </td>
 
-          <td>
-            <span class="status ${statusClass}">
-              ${escapeHtml(employee.status)}
-            </span>
-          </td>
-
-          <td>
-            <div class="row-actions">
-
-              <button
-                class="small-action"
-                type="button"
-                data-action="edit"
-                data-id="${employee.id}"
+            <td>
+              <span
+                class="status ${statusClass}"
               >
-                Edit
-              </button>
+                ${escapeHtml(
+                  employee.status,
+                )}
+              </span>
+            </td>
 
-              <button
-                class="small-action delete"
-                type="button"
-                data-action="delete"
-                data-id="${employee.id}"
-              >
-                Delete
-              </button>
+            <td>
+              <div class="row-actions">
+                <button
+                  class="small-action"
+                  type="button"
+                  data-action="edit"
+                  data-id="${employee.id}"
+                >
+                  Edit
+                </button>
 
-            </div>
-          </td>
-        </tr>
-      `;
-    })
-    .join("");
+                <button
+                  class="small-action delete"
+                  type="button"
+                  data-action="delete"
+                  data-id="${employee.id}"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      })
+      .join("");
 
   elements.emptyState.hidden =
     filteredEmployees.length > 0;
@@ -346,7 +476,9 @@ function renderEmployees() {
    Employee Modal
 ================================ */
 
-function openEmployeeModal(employee = null) {
+function openEmployeeModal(
+  employee = null,
+) {
   elements.employeeForm.reset();
 
   if (employee) {
@@ -395,17 +527,21 @@ function openEmployeeModal(employee = null) {
         .slice(0, 10);
   }
 
-  elements.employeeModal.hidden = false;
+  elements.employeeModal.hidden =
+    false;
 
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow =
+    "hidden";
 
   elements.employeeName.focus();
 }
 
 function closeEmployeeModal() {
-  elements.employeeModal.hidden = true;
+  elements.employeeModal.hidden =
+    true;
 
-  document.body.style.overflow = "";
+  document.body.style.overflow =
+    "";
 }
 
 /* ================================
@@ -416,23 +552,37 @@ function handleEmployeeForm(event) {
   event.preventDefault();
 
   const employeeData = {
-    name: elements.employeeName.value.trim(),
-    email: elements.employeeEmail.value.trim(),
-    role: elements.employeeRole.value.trim(),
+    name:
+      elements.employeeName.value.trim(),
+
+    email:
+      elements.employeeEmail.value.trim(),
+
+    role:
+      elements.employeeRole.value.trim(),
+
     department:
       elements.employeeDepartment.value.trim(),
-    status: elements.employeeStatus.value,
-    joinDate: elements.employeeJoinDate.value,
+
+    status:
+      elements.employeeStatus.value,
+
+    joinDate:
+      elements.employeeJoinDate.value,
   };
 
   const employeeId =
-    Number(elements.employeeId.value);
+    Number(
+      elements.employeeId.value,
+    );
 
+  /* Edit existing employee */
   if (employeeId) {
     const employeeIndex =
       employees.findIndex(
         (employee) =>
-          employee.id === employeeId,
+          employee.id ===
+          employeeId,
       );
 
     if (employeeIndex !== -1) {
@@ -441,7 +591,10 @@ function handleEmployeeForm(event) {
         ...employeeData,
       };
     }
-  } else {
+  }
+
+  /* Add new employee */
+  else {
     employees.unshift({
       id: Date.now(),
       ...employeeData,
@@ -459,9 +612,13 @@ function handleEmployeeForm(event) {
    Edit / Delete Actions
 ================================ */
 
-function handleEmployeeActions(event) {
+function handleEmployeeActions(
+  event,
+) {
   const button =
-    event.target.closest("[data-action]");
+    event.target.closest(
+      "[data-action]",
+    );
 
   if (!button) {
     return;
@@ -472,33 +629,42 @@ function handleEmployeeActions(event) {
 
   const employee =
     employees.find(
-      (item) => item.id === employeeId,
+      (item) =>
+        item.id === employeeId,
     );
 
   if (!employee) {
     return;
   }
 
+  /* Edit */
   if (
-    button.dataset.action === "edit"
+    button.dataset.action ===
+    "edit"
   ) {
     openEmployeeModal(employee);
   }
 
+  /* Delete */
   if (
-    button.dataset.action === "delete"
+    button.dataset.action ===
+    "delete"
   ) {
-    const shouldDelete = confirm(
-      `Delete ${employee.name} from the directory?`,
-    );
+    const shouldDelete =
+      confirm(
+        `Delete ${employee.name} from the directory?`,
+      );
 
     if (!shouldDelete) {
       return;
     }
 
-    employees = employees.filter(
-      (item) => item.id !== employeeId,
-    );
+    employees =
+      employees.filter(
+        (item) =>
+          item.id !==
+          employeeId,
+      );
 
     saveEmployees();
 
@@ -511,7 +677,8 @@ function handleEmployeeActions(event) {
 ================================ */
 
 function clearFilters() {
-  elements.searchInput.value = "";
+  elements.searchInput.value =
+    "";
 
   elements.departmentFilter.value =
     "all";
@@ -536,7 +703,9 @@ function setTheme(theme) {
   );
 
   elements.themeToggle.textContent =
-    isDarkTheme ? "☀" : "☾";
+    isDarkTheme
+      ? "☀"
+      : "☾";
 
   elements.themeToggle.setAttribute(
     "aria-label",
@@ -572,66 +741,71 @@ function toggleTheme() {
    Event Listeners
 ================================ */
 
-document
-  .querySelector("#openEmployeeModal")
-  .addEventListener(
-    "click",
-    () => openEmployeeModal(),
-  );
+/* Open modal from main Add Employee button */
+elements.openEmployeeModal.addEventListener(
+  "click",
+  () => {
+    openEmployeeModal();
+  },
+);
 
-document
-  .querySelector("#openEmployeeEmpty")
-  .addEventListener(
-    "click",
-    () => openEmployeeModal(),
-  );
+/* Open modal from empty-state button */
+elements.openEmployeeEmpty.addEventListener(
+  "click",
+  () => {
+    openEmployeeModal();
+  },
+);
 
-document
-  .querySelector("#closeModal")
-  .addEventListener(
-    "click",
-    closeEmployeeModal,
-  );
+/* Close modal */
+elements.closeModal.addEventListener(
+  "click",
+  closeEmployeeModal,
+);
 
-document
-  .querySelector("#cancelEmployee")
-  .addEventListener(
-    "click",
-    closeEmployeeModal,
-  );
+/* Cancel */
+elements.cancelEmployee.addEventListener(
+  "click",
+  closeEmployeeModal,
+);
 
+/* Form submit */
 elements.employeeForm.addEventListener(
   "submit",
   handleEmployeeForm,
 );
 
+/* Employee table actions */
 elements.employeeList.addEventListener(
   "click",
   handleEmployeeActions,
 );
 
+/* Search */
 elements.searchInput.addEventListener(
   "input",
   renderEmployees,
 );
 
+/* Department filter */
 elements.departmentFilter.addEventListener(
   "change",
   renderEmployees,
 );
 
+/* Status filter */
 elements.statusFilter.addEventListener(
   "change",
   renderEmployees,
 );
 
-document
-  .querySelector("#clearFilters")
-  .addEventListener(
-    "click",
-    clearFilters,
-  );
+/* Clear filters */
+elements.clearFilters.addEventListener(
+  "click",
+  clearFilters,
+);
 
+/* Close modal by clicking overlay */
 elements.employeeModal.addEventListener(
   "click",
   (event) => {
@@ -644,6 +818,7 @@ elements.employeeModal.addEventListener(
   },
 );
 
+/* Escape key closes modal */
 document.addEventListener(
   "keydown",
   (event) => {
@@ -656,6 +831,7 @@ document.addEventListener(
   },
 );
 
+/* Theme toggle */
 elements.themeToggle.addEventListener(
   "click",
   toggleTheme,
@@ -666,11 +842,14 @@ elements.themeToggle.addEventListener(
 ================================ */
 
 elements.todayText.textContent =
-  new Intl.DateTimeFormat("en", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  }).format(new Date());
+  new Intl.DateTimeFormat(
+    "en",
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    },
+  ).format(new Date());
 
 elements.year.textContent =
   new Date().getFullYear();
@@ -683,8 +862,9 @@ let savedTheme = "light";
 
 try {
   savedTheme =
-    localStorage.getItem(THEME_KEY) ||
-    "light";
+    localStorage.getItem(
+      THEME_KEY,
+    ) || "light";
 } catch {
   savedTheme = "light";
 }
