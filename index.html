@@ -1,247 +1,585 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-      name="description"
-      content="A responsive employee management dashboard built with HTML, CSS, and vanilla JavaScript."
-    />
+  <meta
+    name="description"
+    content="A responsive employee management dashboard built with HTML, CSS, and vanilla JavaScript."
+  >
 
-    <title>
-      Employee Management Dashboard - Vanilla JavaScript CRUD Application
-    </title>
+  <title>Employee Management Dashboard</title>
 
-    <link rel="stylesheet" href="main.css" />
-  </head>
+  <link rel="stylesheet" href="main.css">
+</head>
 
-  <body>
-    <!-- =========================
-         Header
-    ========================== -->
-    <header class="topbar">
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="topbar">
+
+    <a
+      class="brand"
+      href="#dashboard"
+      aria-label="Employee Manager dashboard"
+    >
+      <span class="brand-mark" aria-hidden="true">E</span>
+      <span class="brand-name">Employee Manager</span>
+    </a>
+
+
+    <nav class="nav-links" aria-label="Main navigation">
+
       <a
-        class="brand"
+        class="active"
         href="#dashboard"
-        aria-label="Employee Manager dashboard"
       >
-        <span
-          class="brand-mark"
-          aria-hidden="true"
-        >
-          E
-        </span>
-
-        <span class="brand-name">
-          Employee Manager
-        </span>
+        Dashboard
       </a>
 
-      <nav
-        class="nav-links"
-        aria-label="Main navigation"
+      <a href="#employees">
+        Employees
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+
+      <!-- Dark / Light Mode -->
+      <button
+        id="themeToggle"
+        class="icon-button"
+        type="button"
+        aria-label="Switch to dark theme"
+        title="Switch colour theme"
       >
-        <a
-          class="active"
-          href="#dashboard"
-        >
-          Dashboard
-        </a>
+        ☾
+      </button>
 
-        <a href="#employees">
-          Employees
-        </a>
+    </nav>
 
-        <a href="#about">
-          About
-        </a>
-      </nav>
+  </header>
 
-      <div class="header-actions">
-        <button
-          id="themeToggle"
-          class="icon-button"
-          type="button"
-          aria-label="Switch to dark theme"
-          title="Switch colour theme"
-        >
-          ☾
-        </button>
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <main
+    id="dashboard"
+    class="container"
+  >
+
+    <!-- HERO -->
+
+    <section
+      class="hero"
+      aria-labelledby="pageTitle"
+    >
+
+      <div>
+
+        <p class="eyebrow">
+          HUMAN RESOURCES
+        </p>
+
+        <h1 id="pageTitle">
+          Manage your team
+          <span>with clarity.</span>
+        </h1>
+
+        <p
+          id="todayText"
+          class="muted"
+        ></p>
+
       </div>
-    </header>
+
+    </section>
+
 
     <!-- =========================
-         Main Content
+         STATISTICS
     ========================== -->
-    <main
-      id="dashboard"
-      class="container"
+
+    <section
+      class="stats"
+      aria-label="Employee summary"
     >
-      <!-- Hero -->
-      <section
-        class="hero"
-        aria-labelledby="pageTitle"
-      >
+
+      <article>
+
+        <span
+          class="stat-icon"
+          aria-hidden="true"
+        >
+          ♙
+        </span>
+
         <div>
+
+          <small>
+            Total employees
+          </small>
+
+          <strong id="totalCount">
+            0
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <article>
+
+        <span
+          class="stat-icon green"
+          aria-hidden="true"
+        >
+          ●
+        </span>
+
+        <div>
+
+          <small>
+            Active employees
+          </small>
+
+          <strong id="activeCount">
+            0
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <article>
+
+        <span
+          class="stat-icon blue"
+          aria-hidden="true"
+        >
+          ▦
+        </span>
+
+        <div>
+
+          <small>
+            Departments
+          </small>
+
+          <strong id="departmentCount">
+            0
+          </strong>
+
+        </div>
+
+      </article>
+
+
+      <article>
+
+        <span
+          class="stat-icon orange"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
+
+        <div>
+
+          <small>
+            New this month
+          </small>
+
+          <strong id="newCount">
+            0
+          </strong>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         EMPLOYEES
+    ========================== -->
+
+    <section
+      id="employees"
+      aria-labelledby="employeeHeading"
+    >
+
+      <div class="section-heading">
+
+        <div>
+
           <p class="eyebrow">
-            HUMAN RESOURCES
+            TEAM DIRECTORY
           </p>
 
-          <h1 id="pageTitle">
-            Manage your team
-            <span>with clarity.</span>
-          </h1>
+          <h2 id="employeeHeading">
+            Employees
+          </h2>
+
+        </div>
+
+
+        <div class="section-actions">
+
+          <button
+            id="openEmployeeModal"
+            class="primary"
+            type="button"
+          >
+            + Add Employee
+          </button>
+
+          <button
+            id="clearFilters"
+            class="text-button"
+            type="button"
+          >
+            Clear filters
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- FILTERS -->
+
+      <div class="toolbar">
+
+        <label class="search">
+
+          <span aria-hidden="true">
+            ⌕
+          </span>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search by name, role or email..."
+            aria-label="Search employees"
+          >
+
+        </label>
+
+
+        <label>
+
+          Department
+
+          <select
+            id="departmentFilter"
+            aria-label="Filter employees by department"
+          >
+
+            <option value="all">
+              All departments
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <label>
+
+          Status
+
+          <select
+            id="statusFilter"
+            aria-label="Filter employees by status"
+          >
+
+            <option value="all">
+              All statuses
+            </option>
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="On Leave">
+              On Leave
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <!-- EMPLOYEE TABLE -->
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th scope="col">
+                Employee
+              </th>
+
+              <th scope="col">
+                Role &amp; Department
+              </th>
+
+              <th scope="col">
+                Joined
+              </th>
+
+              <th scope="col">
+                Status
+              </th>
+
+              <th scope="col">
+
+                <span class="visually-hidden">
+                  Actions
+                </span>
+
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="employeeList"></tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- EMPTY STATE -->
+
+      <section
+        id="emptyState"
+        class="empty"
+        hidden
+        aria-labelledby="emptyTitle"
+      >
+
+        <span aria-hidden="true">
+          ✦
+        </span>
+
+        <h3 id="emptyTitle">
+          No employees found
+        </h3>
+
+        <p>
+          Try changing your filters,
+          or add a team member.
+        </p>
+
+        <button
+          id="openEmployeeEmptyState"
+          class="primary"
+          type="button"
+        >
+          + Add Employee
+        </button>
+
+      </section>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section
+      id="about"
+      class="about"
+      aria-labelledby="aboutHeading"
+    >
+
+      <span aria-hidden="true">
+        ✦
+      </span>
+
+      <div>
+
+        <h2 id="aboutHeading">
+          A simple way to keep your team organized.
+        </h2>
+
+        <p>
+          Employee Manager is a responsive employee
+          management dashboard built with HTML, CSS,
+          and vanilla JavaScript. Employee records are
+          stored locally in the browser using localStorage.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       EMPLOYEE MODAL
+  ========================== -->
+
+  <div
+    id="employeeModal"
+    class="overlay"
+    hidden
+  >
+
+    <section
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+
+      <header class="modal-header">
+
+        <div>
 
           <p
-            id="todayText"
-            class="muted"
-          ></p>
-        </div>
-      </section>
-
-      <!-- =========================
-           Statistics
-      ========================== -->
-      <section
-        class="stats"
-        aria-label="Employee summary"
-      >
-        <article>
-          <span
-            class="stat-icon"
-            aria-hidden="true"
+            id="modalEyebrow"
+            class="eyebrow"
           >
-            ♙
-          </span>
+            NEW EMPLOYEE
+          </p>
 
-          <div>
-            <small>Total employees</small>
-            <strong id="totalCount">0</strong>
-          </div>
-        </article>
+          <h2 id="modalTitle">
+            Add employee
+          </h2>
 
-        <article>
-          <span
-            class="stat-icon green"
-            aria-hidden="true"
-          >
-            ●
-          </span>
-
-          <div>
-            <small>Active employees</small>
-            <strong id="activeCount">0</strong>
-          </div>
-        </article>
-
-        <article>
-          <span
-            class="stat-icon blue"
-            aria-hidden="true"
-          >
-            ▦
-          </span>
-
-          <div>
-            <small>Departments</small>
-            <strong id="departmentCount">0</strong>
-          </div>
-        </article>
-
-        <article>
-          <span
-            class="stat-icon orange"
-            aria-hidden="true"
-          >
-            ↗
-          </span>
-
-          <div>
-            <small>New this month</small>
-            <strong id="newCount">0</strong>
-          </div>
-        </article>
-      </section>
-
-      <!-- =========================
-           Employees
-      ========================== -->
-      <section
-        id="employees"
-        aria-labelledby="employeeHeading"
-      >
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">
-              TEAM DIRECTORY
-            </p>
-
-            <h2 id="employeeHeading">
-              Employees
-            </h2>
-          </div>
-
-          <div class="section-actions">
-            <button
-              id="openEmployeeModal"
-              class="primary"
-              type="button"
-            >
-              + Add Employee
-            </button>
-
-            <button
-              id="clearFilters"
-              class="text-button"
-              type="button"
-            >
-              Clear filters
-            </button>
-          </div>
         </div>
 
-        <!-- Filters -->
-        <div class="toolbar">
-          <label class="search">
-            <span aria-hidden="true">
-              ⌕
-            </span>
+
+        <button
+          id="closeModal"
+          class="close"
+          type="button"
+          aria-label="Close employee form"
+        >
+          ×
+        </button>
+
+      </header>
+
+
+      <form id="employeeForm">
+
+        <input
+          id="employeeId"
+          type="hidden"
+        >
+
+
+        <div class="form-row">
+
+          <label for="employeeName">
+
+            Full name
 
             <input
-              id="searchInput"
-              type="search"
-              placeholder="Search by name, role or email..."
-              aria-label="Search employees"
-            />
+              id="employeeName"
+              name="employeeName"
+              type="text"
+              maxlength="60"
+              placeholder="e.g. Sofia Clarke"
+              autocomplete="name"
+              required
+            >
+
           </label>
 
-          <label>
+
+          <label for="employeeEmail">
+
+            Work email
+
+            <input
+              id="employeeEmail"
+              name="employeeEmail"
+              type="email"
+              placeholder="sofia@company.com"
+              autocomplete="email"
+              required
+            >
+
+          </label>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <label for="employeeRole">
+
+            Job title
+
+            <input
+              id="employeeRole"
+              name="employeeRole"
+              type="text"
+              maxlength="60"
+              placeholder="e.g. UI Designer"
+              required
+            >
+
+          </label>
+
+
+          <label for="employeeDepartment">
+
             Department
 
-            <select
-              id="departmentFilter"
-              aria-label="Filter employees by department"
+            <input
+              id="employeeDepartment"
+              name="employeeDepartment"
+              type="text"
+              maxlength="40"
+              placeholder="e.g. Design"
+              required
             >
-              <option value="all">
-                All departments
-              </option>
-            </select>
+
           </label>
 
-          <label>
+        </div>
+
+
+        <div class="form-row">
+
+          <label for="employeeStatus">
+
             Status
 
             <select
-              id="statusFilter"
-              aria-label="Filter employees by status"
+              id="employeeStatus"
+              name="employeeStatus"
             >
-              <option value="all">
-                All statuses
-              </option>
 
               <option value="Active">
                 Active
@@ -254,269 +592,75 @@
               <option value="Inactive">
                 Inactive
               </option>
+
             </select>
+
           </label>
+
+
+          <label for="employeeJoinDate">
+
+            Joining date
+
+            <input
+              id="employeeJoinDate"
+              name="employeeJoinDate"
+              type="date"
+              required
+            >
+
+          </label>
+
         </div>
 
-        <!-- Employee Table -->
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">
-                  Employee
-                </th>
 
-                <th scope="col">
-                  Role &amp; Department
-                </th>
-
-                <th scope="col">
-                  Joined
-                </th>
-
-                <th scope="col">
-                  Status
-                </th>
-
-                <th scope="col">
-                  <span class="visually-hidden">
-                    Actions
-                  </span>
-                </th>
-              </tr>
-            </thead>
-
-            <tbody id="employeeList"></tbody>
-          </table>
-        </div>
-
-        <!-- Empty State -->
-        <section
-          id="emptyState"
-          class="empty"
-          hidden
-          aria-labelledby="emptyTitle"
-        >
-          <span aria-hidden="true">
-            ✦
-          </span>
-
-          <h3 id="emptyTitle">
-            No employees found
-          </h3>
-
-          <p>
-            Try changing your filters, or add a team member.
-          </p>
+        <div class="form-actions">
 
           <button
-            id="openEmployeeEmpty"
+            id="cancelEmployee"
+            class="secondary"
+            type="button"
+          >
+            Cancel
+          </button>
+
+          <button
+            id="saveEmployee"
             class="primary"
-            type="button"
+            type="submit"
           >
-            + Add employee
+            Add employee
           </button>
-        </section>
-      </section>
 
-      <!-- =========================
-           About
-      ========================== -->
-      <section
-        id="about"
-        class="about"
-        aria-labelledby="aboutHeading"
-      >
-        <span aria-hidden="true">
-          ✦
-        </span>
-
-        <div>
-          <h2 id="aboutHeading">
-            A simple way to keep your team organized.
-          </h2>
-
-          <p>
-            Employee Manager is a responsive employee
-            management dashboard built with HTML, CSS,
-            and vanilla JavaScript. Employee records are
-            stored locally in the browser using
-            localStorage.
-          </p>
         </div>
-      </section>
-    </main>
 
-    <!-- =========================
-         Employee Modal
-    ========================== -->
-    <div
-      id="employeeModal"
-      class="overlay"
-      hidden
-    >
-      <section
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitle"
-      >
-        <header class="modal-header">
-          <div>
-            <p
-              id="modalEyebrow"
-              class="eyebrow"
-            >
-              NEW EMPLOYEE
-            </p>
+      </form>
 
-            <h2 id="modalTitle">
-              Add employee
-            </h2>
-          </div>
+    </section>
 
-          <button
-            id="closeModal"
-            class="close"
-            type="button"
-            aria-label="Close employee form"
-          >
-            ×
-          </button>
-        </header>
+  </div>
 
-        <form id="employeeForm">
-          <input
-            id="employeeId"
-            type="hidden"
-          />
 
-          <div class="form-row">
-            <label for="employeeName">
-              Full name
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
-              <input
-                id="employeeName"
-                name="employeeName"
-                type="text"
-                maxlength="60"
-                placeholder="e.g. Sofia Clarke"
-                autocomplete="name"
-                required
-              />
-            </label>
+  <footer>
 
-            <label for="employeeEmail">
-              Work email
+    Employee Manager · Built with HTML,
+    CSS &amp; JavaScript ·
+    <span id="year"></span>
 
-              <input
-                id="employeeEmail"
-                name="employeeEmail"
-                type="email"
-                placeholder="sofia@company.com"
-                autocomplete="email"
-                required
-              />
-            </label>
-          </div>
+  </footer>
 
-          <div class="form-row">
-            <label for="employeeRole">
-              Job title
 
-              <input
-                id="employeeRole"
-                name="employeeRole"
-                type="text"
-                maxlength="60"
-                placeholder="e.g. UI Designer"
-                required
-              />
-            </label>
+  <noscript>
+    Please enable JavaScript to use
+    the Employee Management Dashboard.
+  </noscript>
 
-            <label for="employeeDepartment">
-              Department
 
-              <input
-                id="employeeDepartment"
-                name="employeeDepartment"
-                type="text"
-                maxlength="40"
-                placeholder="e.g. Design"
-                required
-              />
-            </label>
-          </div>
+  <script src="app.js"></script>
 
-          <div class="form-row">
-            <label for="employeeStatus">
-              Status
-
-              <select
-                id="employeeStatus"
-                name="employeeStatus"
-              >
-                <option value="Active">
-                  Active
-                </option>
-
-                <option value="On Leave">
-                  On Leave
-                </option>
-
-                <option value="Inactive">
-                  Inactive
-                </option>
-              </select>
-            </label>
-
-            <label for="employeeJoinDate">
-              Joining date
-
-              <input
-                id="employeeJoinDate"
-                name="employeeJoinDate"
-                type="date"
-                required
-              />
-            </label>
-          </div>
-
-          <div class="form-actions">
-            <button
-              id="cancelEmployee"
-              class="secondary"
-              type="button"
-            >
-              Cancel
-            </button>
-
-            <button
-              id="saveEmployee"
-              class="primary"
-              type="submit"
-            >
-              Add employee
-            </button>
-          </div>
-        </form>
-      </section>
-    </div>
-
-    <!-- =========================
-         Footer
-    ========================== -->
-    <footer>
-      Employee Manager · Built with HTML,
-      CSS &amp; JavaScript ·
-      <span id="year"></span>
-    </footer>
-
-    <noscript>
-      Please enable JavaScript to use the Employee Management Dashboard.
-    </noscript>
-
-    <script src="app.js"></script>
-  </body>
+</body>
 </html>
