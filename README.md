@@ -8,7 +8,7 @@ Employee Manager provides a clean interface for managing employee records, viewi
 
 ## 🚀 Live Demo
 
-[View Live Demo](YOUR_LIVE_DEMO_URL)
+[View Live Demo](http://127.0.0.1:5500/index.html)
 
 ---
 ## 📸 Project Preview
